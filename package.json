@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ophiuchus2/wrongthink-node-cmd-client/issues"
   },
-  "homepage": "https://github.com/ophiuchus2/wrongthink-node-cmd-client#readme"
+  "homepage": "https://github.com/ophiuchus2/wrongthink-node-cmd-client#readme",
+  "dependencies": {
+    "commander": "^6.1.0",
+    "grpc": "^1.24.3"
+  }
 }
