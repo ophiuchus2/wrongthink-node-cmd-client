@@ -19,6 +19,8 @@
   "homepage": "https://github.com/ophiuchus2/wrongthink-node-cmd-client#readme",
   "dependencies": {
     "commander": "^6.1.0",
-    "grpc": "^1.24.3"
+    "google-protobuf": "^3.13.0",
+    "grpc": "^1.24.3",
+    "node-pre-gyp": "^0.15.0"
   }
 }
