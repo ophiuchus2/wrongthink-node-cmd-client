@@ -34,7 +34,7 @@ function getWrongthinkCommunities() {
 
 function createWrongthinkCommunity(name, adminid, public) {
   var req = new messages.CreateWrongthinkCommunityRequest([name, +adminid, (public == "true")]);
-  console.log("making request:");
+  console.log("making createWrongthinkCommunity request:");
   console.log(req.toObject());
   client.createWrongthinkCommunity(req, function(error, community) {
     if (error) {
@@ -47,8 +47,39 @@ function createWrongthinkCommunity(name, adminid, public) {
   });
 }
 
+function createWrongthinkChannel(name, communityid, adminid, anon) {
+  var req = new messages.CreateWrongThinkChannelRequest([name, +communityid, +adminid, (anon == "true")]);
+  console.log("making createWrongthinkChannel request:");
+  console.log(req);
+  client.createWrongthinkChannel(req, function(error, channel) {
+    if (error) {
+      console.log(error);
+      return;
+    } else {
+      console.log("created channel:");
+      console.log(channel.toObject());
+    }
+  });
+}
+
+function getWrongthinkChannels(communityid) {
+  var req = new messages.GetWrongthinkChannelsRequest([+communityid]);
+  console.log("making getWrongthinkChannels request:");
+  console.log(req);
+  var call = client.getWrongthinkChannels(req);
+  call.on('data', function(channel) {
+    console.log(channel.toObject());
+  });
+  call.on('error', function(e) {
+    // An error has occurred and the stream has been closed.
+    console.log(e);
+  });
+}
+
 module.exports = {
   createUser,
   getWrongthinkCommunities,
-  createWrongthinkCommunity
+  createWrongthinkCommunity,
+  createWrongthinkChannel,
+  getWrongthinkChannels
 };
