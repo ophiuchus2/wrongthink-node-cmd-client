@@ -3,7 +3,8 @@ const { createUser,
         getWrongthinkCommunities,
         createWrongthinkCommunity,
         createWrongthinkChannel,
-        getWrongthinkChannels } = require('./command');
+        getWrongthinkChannels,
+        generateUser } = require('./command');
 
 program
   .version('0.0.1')
@@ -14,6 +15,12 @@ program
   .alias('cu')
   .description('Create a user account')
   .action((username, password, admin) => createUser(username, password, admin))
+
+  program
+    .command("generateuser")
+    .alias('gu')
+    .description('Generate a user account')
+    .action(() => generateUser())
 
 program
   .command("getcommunities")

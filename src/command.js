@@ -20,6 +20,21 @@ function createUser(un, pw, ad) {
   });
 }
 
+function generateUser() {
+  var req = new messages.GenericRequest();
+  console.log("making request:");
+  console.log(req.toObject());
+  client.generateUser(req, function(error, user) {
+    if (error) {
+      console.log(error);
+      return;
+    } else {
+      console.log('generated user:');
+      console.log(user.toObject());
+    }
+  });
+}
+
 function getWrongthinkCommunities() {
   var req = new messages.GetWrongthinkCommunitiesRequest();
   var call = client.getWrongthinkCommunities(req);
@@ -50,7 +65,7 @@ function createWrongthinkCommunity(name, adminid, public) {
 function createWrongthinkChannel(name, communityid, adminid, anon) {
   var req = new messages.CreateWrongThinkChannelRequest([name, +communityid, +adminid, (anon == "true")]);
   console.log("making createWrongthinkChannel request:");
-  console.log(req);
+  console.log(req.toObject());
   client.createWrongthinkChannel(req, function(error, channel) {
     if (error) {
       console.log(error);
@@ -65,7 +80,7 @@ function createWrongthinkChannel(name, communityid, adminid, anon) {
 function getWrongthinkChannels(communityid) {
   var req = new messages.GetWrongthinkChannelsRequest([+communityid]);
   console.log("making getWrongthinkChannels request:");
-  console.log(req);
+  console.log(req.toObject());
   var call = client.getWrongthinkChannels(req);
   call.on('data', function(channel) {
     console.log(channel.toObject());
@@ -81,5 +96,6 @@ module.exports = {
   getWrongthinkCommunities,
   createWrongthinkCommunity,
   createWrongthinkChannel,
-  getWrongthinkChannels
+  getWrongthinkChannels,
+  generateUser
 };
